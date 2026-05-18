@@ -7,11 +7,12 @@ export default function Hero() {
           Direct response copy, engineered
         </div>
 
-        <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl leading-[0.92] tracking-tight mb-10">
-          Write the
-          <br />
-          new control.
+        <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl leading-[0.92] tracking-tight mb-4">
+          The control is what&apos;s already winning.
         </h1>
+        <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight text-ember mb-10">
+          NewControl is how you write the one that wins next.
+        </h2>
 
         <p className="text-xl md:text-2xl text-fg/70 max-w-2xl leading-relaxed mb-12">
           NewControl turns your offer into sales letters, cold emails, landing
@@ -34,7 +35,3 @@ export default function Hero() {
             <span aria-hidden>{"→"}</span>
           </a>
         </div>
-      </div>
-    </section>
-  );
-}
