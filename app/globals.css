@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: 250 248 244;
+    --fg: 15 15 14;
+    --surface: 255 255 255;
+    --muted: 107 107 104;
+  }
+
+  .dark {
+    --bg: 12 12 11;
+    --fg: 250 248 244;
+    --surface: 24 24 22;
+    --muted: 170 170 165;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-feature-settings: "ss01", "cv01", "cv11";
+  }
+}
+
+::selection {
+  background-color: #DD3B0B;
+  color: #FAF8F4;
+}
+
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.dark .grain::before {
+  opacity: 0.05;
+}
