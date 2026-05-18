@@ -15,7 +15,7 @@ export default function FinalCTA() {
         </p>
         <form
           className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto"
-          action="https://formspree.io/f/your_form_id"
+        action="https://formspree.io/f/xnjrqddn"
           method="POST"
         >
           <input
