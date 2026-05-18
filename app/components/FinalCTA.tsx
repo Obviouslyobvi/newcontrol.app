@@ -3,11 +3,7 @@ export default function FinalCTA() {
     <section id="access" className="px-6 py-40">
       <div className="mx-auto max-w-4xl text-center">
         <h2 className="font-serif text-5xl md:text-7xl tracking-tight leading-[1.04] mb-10">
-          The control is what's already winning.
-          <br />
-          <span className="text-ember">
-            NewControl is how you write the one that wins next.
-          </span>
+          Write the <span className="text-ember">new control.</span>
         </h2>
         <p className="text-xl text-fg/70 max-w-2xl mx-auto mb-12 leading-relaxed">
           Early access is opening soon. Drop your email and we'll let you know
