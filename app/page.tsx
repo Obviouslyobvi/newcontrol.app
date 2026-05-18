@@ -1,6 +1,5 @@
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
-import TrustStrip from "./components/TrustStrip";
 import Framework from "./components/Framework";
 import Features from "./components/Features";
 import HowItWorks from "./components/HowItWorks";
@@ -13,8 +12,7 @@ export default function Page() {
     <main className="relative">
       <Nav />
       <Hero />
-      <TrustStrip />
-      <Framework />
+         <Framework />
       <Features />
       <HowItWorks />
       <WithoutWith />
