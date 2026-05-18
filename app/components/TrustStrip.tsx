@@ -1,6 +1,5 @@
 const controls = [
   "NRA Emergency Assistance Plus",
-  "AAA Membership",
   "Discover Home Equity",
   "Healthspan+ Montecito",
 ];
