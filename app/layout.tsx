@@ -31,8 +31,7 @@ export const metadata: Metadata = {
 };
 
 const themeInitScript =
-  "(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;var t=s||(d?'dark':'light');if(t==='dark')document.documentElement.classList.add('dark');}catch(e){}})();";
-
+  "(function(){try{var s=localStorage.getItem('theme');if(s==='dark')document.documentElement.classList.add('dark');}catch(e){}})();";
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
