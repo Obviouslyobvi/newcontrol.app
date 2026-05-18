@@ -35,3 +35,7 @@ export default function Hero() {
             <span aria-hidden>{"→"}</span>
           </a>
         </div>
+      </div>
+    </section>
+  );
+}
