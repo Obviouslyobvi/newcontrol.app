@@ -7,12 +7,12 @@ import VariationCard from "./VariationCard";
 import VariationPreview from "./VariationPreview";
 
 const TIPS = [
-  "The P.S. is the second-most-read part of any letter. Skimmers jump straight to it.",
-  "Five variations means five different opening angles — test them against each other.",
-  "Great direct mail sounds like a smart friend talking at the kitchen table, not a corporation announcing.",
-  "Every letter opens with a person in a situation. The product never shows up in the first two paragraphs.",
-  "Specific numbers beat vague claims. '312 reviews' outsells 'hundreds of happy customers.'",
-  "The headline is the ad for the rest of the letter. If it fails, nothing else gets read.",
+  "Five variations means five different openings — test them against each other before committing to a print run.",
+  "The best-performing letter is rarely the one you'd have guessed. Let your market vote.",
+  "Direct mail still earns 15-17% ROI for many businesses — several times typical digital ad returns.",
+  "Mail a small test batch first. The winner becomes your control; then try to beat it.",
+  "Your reader decides in seconds whether to keep reading. The opening carries the whole letter.",
+  "Specifics sell. Check that your brief gave real numbers, real proof, and a real deadline.",
 ];
 
 export default function ResultsViewer({
