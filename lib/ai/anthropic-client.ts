@@ -11,7 +11,7 @@ export function isAiConfigured(): boolean {
   return Boolean(process.env.ANTHROPIC_API_KEY);
 }
 
-const MODEL = () => process.env.ANTHROPIC_MODEL ?? "claude-sonnet-4-6";
+const MODEL = () => process.env.ANTHROPIC_MODEL ?? "claude-opus-4-6";
 const MAX_TOKENS = () => Number(process.env.ANTHROPIC_MAX_TOKENS ?? 8192);
 
 let _client: Anthropic | null = null;

@@ -113,8 +113,8 @@ export async function generateOneVariation(
     action: "generate",
     campaignId: campaign.id,
     tokensUsed: inputTokens + outputTokens,
-    // Approximate Sonnet-class pricing; refine when billing lands.
-    costCents: Math.ceil((inputTokens * 0.0003 + outputTokens * 0.0015) / 10),
+    // Approximate Opus 4.6 pricing ($5/M input, $25/M output) in cents.
+    costCents: Math.ceil(inputTokens * 0.0005 + outputTokens * 0.0025),
   });
 
   return variation;

@@ -50,14 +50,15 @@ npm run db:seed    # loads the 25 launch templates
 
 1. Go to [console.anthropic.com](https://console.anthropic.com) and sign up.
 2. Add billing (Settings → Billing). A typical letter campaign (5 variations)
-   costs roughly $0.50–$1.00 in API usage.
+   costs roughly $1–$2 in API usage on the default Opus model.
 3. Create an API key (Settings → API Keys → Create Key) and copy it
    (starts with `sk-ant-`).
 4. In Vercel, add:
    - `ANTHROPIC_API_KEY` = the key
 
 Optional knobs (defaults are fine):
-- `ANTHROPIC_MODEL` (default `claude-sonnet-4-6`)
+- `ANTHROPIC_MODEL` (default `claude-opus-4-6` — top writing quality; switch
+  to `claude-sonnet-4-6` for roughly 40% lower per-letter cost)
 - `ANTHROPIC_MAX_TOKENS` (default `8192`)
 
 ✅ Test: create a campaign and generate — you should get five real letters,
