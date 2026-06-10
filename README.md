@@ -1,97 +1,88 @@
 # NewControl
 
-The marketing site for NewControl. Built with Next.js 15, React 19, Tailwind CSS 3, and TypeScript.
+AI-powered direct response copywriting platform. Built with Next.js 15,
+React 19, TypeScript, Tailwind CSS 3, Drizzle ORM (Neon PostgreSQL), and the
+Anthropic API.
+
+**New here? Read [`SETUP.md`](./SETUP.md)** — it walks through connecting the
+database, the AI key, file storage, and email in plain English.
 
 ## What's inside
 
 ```
-newcontrol/
+newcontrol.app/
 ├── app/
-│   ├── components/        ← every section is its own file. Edit text here.
-│   │   ├── Nav.tsx
-│   │   ├── Hero.tsx
-│   │   ├── TrustStrip.tsx
-│   │   ├── Framework.tsx
-│   │   ├── Features.tsx
-│   │   ├── HowItWorks.tsx
-│   │   ├── WithoutWith.tsx
-│   │   ├── FinalCTA.tsx
-│   │   ├── Footer.tsx
-│   │   └── ThemeToggle.tsx
-│   ├── globals.css        ← CSS variables for light/dark colors
-│   ├── layout.tsx         ← page metadata, fonts, theme-init script
-│   └── page.tsx           ← assembles all the sections
-├── tailwind.config.ts     ← color palette, fonts, dark mode setup
-├── next.config.mjs
-├── package.json
-└── tsconfig.json
+│   ├── (marketing)/        Public site: landing page, /pricing, /sample
+│   ├── (auth)/             /sign-in and /sign-up
+│   ├── (dashboard)/        The product (behind auth): campaigns, wizard,
+│   │                       results, editor, exports, templates, brand, settings
+│   └── api/                Auth, campaigns, generation (SSE), exports,
+│                           brand profiles, templates, uploads, webhooks
+├── lib/
+│   ├── ai/                 Generation engine: prompt layers (the core IP),
+│   │                       Anthropic client, parser, 3-pass quality check
+│   ├── db/                 Drizzle schema, client, seed (25 templates)
+│   ├── auth/               JWT sessions (jose) + bcrypt hashing
+│   ├── pdf/                PDF (Puppeteer/Chromium), DOCX, TXT exporters
+│   ├── storage/            R2/S3 uploads
+│   ├── email/              Resend transactional email
+│   ├── payments/           Plug-in interface (Stripe/LemonSqueezy later)
+│   └── utils/              Validation (Zod), rate limiting, errors
+├── components/ui/          Shared UI primitives
+├── middleware.ts           Route protection
+└── SETUP.md                Step-by-step service setup
 ```
 
-## To run locally (one-time setup)
+## Run locally
 
-You need Node.js 20 or newer. Install from https://nodejs.org if you don't have it.
+You need Node.js 20 or newer (https://nodejs.org).
 
 ```bash
-cd newcontrol
 npm install
+cp .env.example .env.local   # fill in at least DATABASE_URL and JWT_SECRET
+npm run db:push              # create tables
+npm run db:seed              # load the 25 launch templates
 npm run dev
 ```
 
-Open http://localhost:3000.
+Open http://localhost:3000. Without `ANTHROPIC_API_KEY` the app runs in a
+clearly-labeled sample mode; without storage/email keys those features
+degrade gracefully. See SETUP.md.
 
-## To edit copy
+## Useful commands
 
-Every section of the page is a separate file in `app/components/`. To change wording, open the section's file in any text editor (or directly on GitHub.com), edit the text inside the JSX, save, push. Vercel will redeploy automatically.
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Dev server at localhost:3000 |
+| `npm run build` | Production build (run before pushing) |
+| `npm run db:push` | Sync the Drizzle schema to the database |
+| `npm run db:seed` | Load the 25 launch templates (safe to re-run) |
 
-Quick reference of what lives where:
+## Editing marketing copy
+
+Every section of the landing page is its own file in
+`app/(marketing)/components/`:
+
 - Headline + subhead: `Hero.tsx`
-- The 22 step labels: `Framework.tsx` (top of file, `steps` array)
-- The six feature cards: `Features.tsx` (top of file, `features` array)
-- Three steps in How It Works: `HowItWorks.tsx`
-- WITHOUT / WITH bullet lists: `WithoutWith.tsx`
+- Agency comparison: `AgencyMath.tsx`
+- The six feature cards: `Features.tsx`
+- How It Works steps: `HowItWorks.tsx`
+- WITHOUT / WITH lists: `WithoutWith.tsx`
+- Testimonials (placeholders to replace): `SocialProof.tsx`
+- Plans + prices: `Pricing.tsx`
+- FAQ entries: `FAQ.tsx`
 - Final headline + email form: `FinalCTA.tsx`
 - Logo wordmark, nav links: `Nav.tsx`
-
-## To deploy to Vercel (free, auto-deploys on git push)
-
-1. Push this project to your repo `github.com/Obviouslyobvi/newcontrol.app`. From the project folder:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git branch -M main
-   git remote add origin https://github.com/Obviouslyobvi/newcontrol.app.git
-   git push -u origin main
-   ```
-
-2. Go to https://vercel.com/new and sign in with GitHub.
-
-3. Click "Import" next to your `newcontrol.app` repo.
-
-4. Vercel auto-detects Next.js. Don't change any settings. Click "Deploy".
-
-5. First deploy finishes in about a minute. You'll get a URL like `newcontrol-xyz.vercel.app`.
-
-6. To point your custom domain `newcontrol.app` at it:
-   - In Vercel: Project Settings → Domains → Add `newcontrol.app`.
-   - Vercel will show you the DNS records to add at your domain registrar (usually an `A` record pointing to `76.76.21.21`, or a `CNAME` pointing to `cname.vercel-dns.com`).
-   - Add those records at your registrar. DNS propagates in 5 to 60 minutes.
-
-After that, every `git push` to the `main` branch redeploys the site automatically.
-
-## To collect emails from the form
-
-The form in `FinalCTA.tsx` currently posts to a placeholder Formspree URL (`https://formspree.io/f/your_form_id`). Two easy options:
-
-- **Formspree** (free tier): Sign up at https://formspree.io, create a new form, copy the form ID, paste it into `action="https://formspree.io/f/YOUR_REAL_ID"` in `FinalCTA.tsx`.
-- **ConvertKit, Mailchimp, Klaviyo, or any list tool**: Each has an embeddable form. Replace the entire `<form>` element in `FinalCTA.tsx` with their embed.
+- Sample letter page: `app/(marketing)/sample/page.tsx`
 
 ## Theme
 
-The site supports light and dark. The toggle is in the nav. Choice is saved in the browser. First-time visitors get whichever mode matches their OS setting.
+Light/dark toggle in the nav, saved in the browser. Default colors live in
+`app/globals.css` (`:root` for light, `.dark` for dark) as space-separated
+RGB triples so Tailwind opacity modifiers work (`text-fg/70`).
 
-To change the default colors, edit `app/globals.css`:
-- `:root` sets light mode colors
-- `.dark` sets dark mode colors
+## Deploying
 
-Values are space-separated RGB triples so Tailwind can apply opacity (`text-fg/70` for 70% opacity foreground, etc.).
+Pushes to `main` auto-deploy via Vercel. Environment variables are managed in
+Vercel → Project → Settings → Environment Variables (see SETUP.md for the
+full list).
