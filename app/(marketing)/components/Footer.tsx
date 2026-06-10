@@ -10,12 +10,6 @@ export default function Footer() {
           >
             newcontrol.app
           </a>
-          <a
-            href="https://github.com/Obviouslyobvi/newcontrol.app"
-            className="hover:text-fg transition-colors"
-          >
-            GitHub
-          </a>
           <span>© {new Date().getFullYear()} NewControl</span>
         </div>
       </div>
