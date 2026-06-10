@@ -8,8 +8,13 @@ import CampaignWizard from "../../components/CampaignWizard";
 export const metadata: Metadata = { title: "New campaign — NewControl" };
 export const dynamic = "force-dynamic";
 
-export default async function NewCampaignPage() {
+export default async function NewCampaignPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ template?: string }>;
+}) {
   const session = await requirePageSession();
+  const { template: initialTemplateId } = await searchParams;
 
   let templates: Template[] = [];
   let brandProfiles: BrandProfile[] = [];
@@ -34,6 +39,10 @@ export default async function NewCampaignPage() {
   }
 
   return (
-    <CampaignWizard templates={templates} brandProfiles={brandProfiles} />
+    <CampaignWizard
+      templates={templates}
+      brandProfiles={brandProfiles}
+      initialTemplateId={initialTemplateId}
+    />
   );
 }

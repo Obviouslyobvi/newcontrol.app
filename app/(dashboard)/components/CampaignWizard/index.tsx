@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { ArrowLeft, ArrowRight, Sparkles, Save } from "lucide-react";
@@ -16,9 +16,11 @@ import { EMPTY_BRIEF, CAMPAIGN_TYPES, type CampaignType } from "./types";
 export default function CampaignWizard({
   templates,
   brandProfiles,
+  initialTemplateId,
 }: {
   templates: Template[];
   brandProfiles: BrandProfile[];
+  initialTemplateId?: string;
 }) {
   const router = useRouter();
   const [step, setStep] = useState(1);
@@ -33,6 +35,18 @@ export default function CampaignWizard({
   const [templateId, setTemplateId] = useState<string | null>(null);
   const [appliedTemplateName, setAppliedTemplateName] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+
+  // Arriving from the template library (?template=ID) pre-applies it.
+  const initialApplied = useRef(false);
+  useEffect(() => {
+    if (initialApplied.current || !initialTemplateId) return;
+    const t = templates.find((tpl) => tpl.id === initialTemplateId);
+    if (t) {
+      initialApplied.current = true;
+      applyTemplate(t);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialTemplateId, templates]);
 
   function autoTitle(type: CampaignType, offer: string): string {
     const label = CAMPAIGN_TYPES.find((t) => t.value === type)?.label ?? "Campaign";
