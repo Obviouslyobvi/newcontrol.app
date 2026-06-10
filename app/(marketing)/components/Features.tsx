@@ -42,10 +42,14 @@ export default function Features() {
           <div className="text-xs font-medium tracking-[0.18em] uppercase text-ember mb-4">
             What's inside
           </div>
-          <h2 className="font-serif text-4xl md:text-6xl tracking-tight leading-[1.02]">
+          <h2 className="font-serif text-4xl md:text-6xl tracking-tight leading-[1.02] mb-6">
             Not a prompt wrapper.
             <br />A persuasion engine.
           </h2>
+          <p className="text-lg text-fg/70 leading-relaxed">
+            This isn&apos;t generic AI. It&apos;s a system — the structural
+            discipline of winning direct response, enforced on every draft.
+          </p>
         </div>
         <div className="grid md:grid-cols-2 gap-12 md:gap-16">
           {features.map((f) => (
